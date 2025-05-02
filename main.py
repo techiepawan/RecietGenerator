@@ -19,7 +19,14 @@ logger = logging.getLogger(__name__)
 app = FastAPI(debug=True)
 
 # Mount static files directory
-app.mount("/static", StaticFiles(directory="/mnt/d/RecietGenerator/static"), name="static")
+#app.mount("/static", StaticFiles(directory="/mnt/d/RecietGenerator/static"), name="static")
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
 
 # Initialize templates
 templates = Jinja2Templates(directory="templates")
